@@ -43,7 +43,7 @@
 </style>
 
 {% if request.user.is_authenticated %}
-    <h2 style="text-align: center;">Welcome back, {{ request.user.username }} 👋</h2>
+    <h2 style="text-align: center;">Welcome back, {{ request.user.username }}</h2>
 {% else %}
     <h2 style="text-align: center;">Explore Our Features!</h2>
 {% endif %}

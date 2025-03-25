@@ -35,19 +35,26 @@
     font-size: 0.9rem;
     color: #555;
   }
+
+  .card a {
+    color: black;
+    text-decoration: none;
+  }
 </style>
 
 {% if request.user.is_authenticated %}
     <h2 style="text-align: center;">Welcome back, {{ request.user.username }} 👋</h2>
 {% else %}
-    <h2 style="text-align: center;">Explore FocusFlow Features</h2>
+    <h2 style="text-align: center;">Explore Our Features!</h2>
 {% endif %}
 
 <div class="grid">
   <div class="card">
-    <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Timer" alt="Timer">
-    <h4>Timer</h4>
-    <p>Use it to get started on a task.</p>
+    <a href="{% url 'timer' %}">
+      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Timer" alt="Timer">
+      <h4>Pomodoro Timer</h4>
+      <p>Timer with intervals of breaks and work time to maximize productivity.</p>
+    </a>
   </div>
 
   {% for i in "23456" %}

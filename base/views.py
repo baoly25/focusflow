@@ -27,3 +27,6 @@ def login_view(request):
 
 def homepage(request):
     return render(request, 'homepage.html')
+
+def pomodoro_timer(request):
+    return render(request, 'pomodoro.html')

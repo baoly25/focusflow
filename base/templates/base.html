@@ -6,8 +6,19 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1 style="text-align: center;">FocusFlow</h1>
+    <header style="position: relative; padding: 20px; text-align: center;">
+        <h1 style="margin: 0; font-size: 2rem;">
+            <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">FocusFlow</a>
+        </h1>
+    
+        <div style="position: absolute; top: 20px; right: 20px;">
+            {% if request.user.is_authenticated %}
+                <img src="https://via.placeholder.com/40" alt="User" style="width: 40px; height: 40px; border-radius: 50%;">
+            {% else %}
+                <a href="{% url 'login' %}" style="margin-right: 10px;">Sign In</a>
+                <a href="{% url 'register' %}">Sign Up</a>
+            {% endif %}
+        </div>
     </header>
 
     <main>

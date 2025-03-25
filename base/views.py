@@ -3,6 +3,8 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from .forms import EmailAuthenticationForm
+from django.shortcuts import render
+
 
 def register(request):
     if request.method == 'POST':
@@ -22,3 +24,6 @@ def login_view(request):
         auth_login(request, user)
         return redirect('home')
     return render(request, 'registration/login.html', {'form': form})
+
+def homepage(request):
+    return render(request, 'homepage.html')

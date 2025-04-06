@@ -57,7 +57,15 @@
     </a>
   </div>
 
-  {% for i in "23456" %}
+  <div class="card">
+    <a href="{% url 'journal_list' %}">
+      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Journal" alt="Journal">
+      <h4>Journaling</h4>
+      <p>Write your thoughts and track your emotional wellness.</p>
+    </a>
+  </div>
+
+  {% for i in "3456" %}
   <div class="card">
     <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png?text=Feature+{{ i }}" alt="Feature {{ i }}">
     <h4>Feature {{ i }}</h4>

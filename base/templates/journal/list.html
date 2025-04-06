@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+  <h2>Your Journals</h2>
+  <a href="{% url 'journal_create' %}">+ New Journal</a>
+  {% if journals %}
+    <ul style="margin-top: 20px;">
+      {% for journal in journals %}
+        <li>
+          <a href="{% url 'journal_edit' journal.pk %}">
+            {{ journal.title }} — {{ journal.created_at|date:"M d, Y" }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no journals yet.</p>
+    <a href="{% url 'journal_create' %}">Create your first journal</a>
+  {% endif %}
+</div>
+{% endblock %}

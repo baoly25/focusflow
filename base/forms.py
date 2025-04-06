@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
+from django import forms
+from .models import Journal
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
@@ -37,3 +39,12 @@ class EmailAuthenticationForm(forms.Form):
 
     def get_user(self):
         return self.user
+
+class JournalForm(forms.ModelForm):
+    class Meta:
+        model = Journal
+        fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Title'}),
+            'content': forms.Textarea(attrs={'placeholder': 'Write your thoughts here...'}),
+        }

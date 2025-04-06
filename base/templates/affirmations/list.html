@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align: center;">Daily Affirmations</h2>
+
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="{% url 'saved_affirmations' %}" class="btn" style="text-decoration: none; font-weight: bold;">⭐ View Saved</a>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto;">
+  {% for affirmation in affirmations %}
+    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+      <h4>{{ affirmation.title }}</h4>
+      <p>{{ affirmation.content }}</p>
+
+      <form method="POST" action="{% url 'toggle_affirmation_like' affirmation.id %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm">
+          {% if user in affirmation.liked_by.all %}
+            ❤️ Saved
+          {% else %}
+            🤍 Save
+          {% endif %}
+        </button>
+      </form>
+
+      <div style="margin-top: 10px;">
+        <strong>Comments:</strong>
+        <ul>
+          {% for comment in affirmation.affirmationcomment_set.all %}
+            <li>{{ comment.user.username }}: {{ comment.text }}</li>
+          {% empty %}
+            <li>No comments yet.</li>
+          {% endfor %}
+        </ul>
+
+        <form method="POST" action="{% url 'submit_affirmation_comment' affirmation.id %}">
+          {% csrf_token %}
+          <input type="text" name="text" placeholder="Add a comment..." style="width: 70%;" required>
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+

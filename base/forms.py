@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django import forms
 from .models import Journal
+from .models import TipComment
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
@@ -48,3 +49,21 @@ class JournalForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Title'}),
             'content': forms.Textarea(attrs={'placeholder': 'Write your thoughts here...'}),
         }
+
+class TipCommentForm(forms.ModelForm):
+    class Meta:
+        model = TipComment
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'rows': 2,
+                'placeholder': 'Add a comment...',
+            })
+        }
+
+from .models import AffirmationComment
+
+class AffirmationCommentForm(forms.ModelForm):
+    class Meta:
+        model = AffirmationComment
+        fields = ['text']

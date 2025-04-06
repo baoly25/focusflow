@@ -65,7 +65,31 @@
     </a>
   </div>
 
-  {% for i in "3456" %}
+  <div class="card">
+    <a href="{% url 'stress_tips' %}">
+      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Stress" alt="Stress Tips">
+      <h4>Stress Management Tips</h4>
+      <p>Scroll tips, save your favorites, and add comments.</p>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="{% url 'affirmations' %}">
+      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Affirmations" alt="Affirmations">
+      <h4>Daily Affirmations</h4>
+      <p>Uplifting thoughts to start your day positively and boost your mindset.</p>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="{% url 'relaxation_list' %}">
+      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Relaxation" alt="Relaxation">
+      <h4>Guided Relaxation</h4>
+      <p>Choose from a variety of relaxation techniques with video guidance.</p>
+    </a>
+  </div>
+
+  {% for i in "6" %}
   <div class="card">
     <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png?text=Feature+{{ i }}" alt="Feature {{ i }}">
     <h4>Feature {{ i }}</h4>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="text-align: center;">Guided Relaxation Techniques</h2>
+
+<div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto;">
+  {% for technique in techniques %}
+    <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center;">
+      <a href="{% url 'relaxation_detail' technique.slug %}" style="text-decoration: none; color: inherit;">
+        <img src="{{ technique.image }}" alt="{{ technique.name }}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+        <h4>{{ technique.name }}</h4>
+        <p style="font-size: 0.9rem; color: #555;">{{ technique.description }}</p>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

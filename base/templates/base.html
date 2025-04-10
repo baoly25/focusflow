@@ -13,11 +13,19 @@
     
         <div style="position: absolute; top: 20px; right: 20px;">
             {% if request.user.is_authenticated %}
-                <img src="https://via.placeholder.com/40" alt="User" style="width: 40px; height: 40px; border-radius: 50%;">
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style=" background: none; border: none; color: #007bff; cursor: pointer; margin-right: 10px;">Log Out</button>
+                </form>
+                <img src="https://cdn.nba.com/teams/legacy/i.cdn.turner.com/drp/nba/cavaliers/sites/default/files/2017_lebron_james.png" alt="User" style="width: 40px; height: 40px; border-radius: 50%;">
             {% else %}
                 <a href="{% url 'login' %}" style="margin-right: 10px;">Sign In</a>
                 <a href="{% url 'register' %}">Sign Up</a>
             {% endif %}
+        </div>
+    
+        <div style="position: absolute; top: 20px; left: 20px;">
+            <a href="{% url 'home' %}" style="color: #007bff; text-decoration: none;">Home</a>
         </div>
     </header>
 

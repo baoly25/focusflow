@@ -6,10 +6,14 @@
   {% if journals %}
     <ul style="margin-top: 20px;">
       {% for journal in journals %}
-        <li>
+        <li style="margin-bottom: 10px;">
           <a href="{% url 'journal_edit' journal.pk %}">
             {{ journal.title }} — {{ journal.created_at|date:"M d, Y" }}
           </a>
+          <form action="{% url 'journal_delete' journal.pk %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('Delete this journal?')" style="margin-left: 10px;">Delete</button>
+          </form>
         </li>
       {% endfor %}
     </ul>

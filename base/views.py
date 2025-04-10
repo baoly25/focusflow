@@ -189,3 +189,10 @@ def relaxation_detail(request, technique_slug):
         return redirect('relaxation_list')
 
     return render(request, 'relaxation/detail.html', {'technique': technique})
+
+@login_required
+@require_POST
+def journal_delete(request, pk):
+    journal = get_object_or_404(Journal, pk=pk, user=request.user)
+    journal.delete()
+    return redirect('journal_list')

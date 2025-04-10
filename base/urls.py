@@ -1,11 +1,12 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 from .views import (
     register, login_view, homepage, pomodoro_timer,
     journal_list, journal_create, journal_edit,
     stress_tips_list, toggle_tip_like, submit_tip_comment, saved_tips,
     affirmation_list, submit_affirmation_comment,
     toggle_affirmation_like, saved_affirmations, relaxation_list,
-    relaxation_detail
+    relaxation_detail, journal_delete
 )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     path('journal/', journal_list, name='journal_list'),
     path('journal/new/', journal_create, name='journal_create'),
     path('journal/<int:pk>/edit/', journal_edit, name='journal_edit'),
+    path('journal/<int:pk>/delete/', journal_delete, name='journal_delete'),
 
     # stress tips
     path('tips/', stress_tips_list, name='stress_tips'),
@@ -34,4 +36,6 @@ urlpatterns = [
 
     path('relaxation/', relaxation_list, name='relaxation_list'),
     path('relaxation/<slug:technique_slug>/', relaxation_detail, name='relaxation_detail'),
+
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 ]

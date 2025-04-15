@@ -27,7 +27,15 @@
         <strong>Comments:</strong>
         <ul>
           {% for comment in affirmation.affirmationcomment_set.all %}
-            <li>{{ comment.user.username }}: {{ comment.text }}</li>
+            <li>
+              {{ comment.user.username }}: {{ comment.text }}
+              {% if comment.user == request.user %}
+                <form method="POST" action="{% url 'delete_affirmation_comment' comment.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="border:none; background:none; color:red; cursor:pointer;">🗑️</button>
+                </form>
+              {% endif %}
+            </li>
           {% empty %}
             <li>No comments yet.</li>
           {% endfor %}
@@ -43,4 +51,3 @@
   {% endfor %}
 </div>
 {% endblock %}
-

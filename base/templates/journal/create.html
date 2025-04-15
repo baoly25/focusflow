@@ -1,11 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 <div style="max-width: 700px; margin: 0 auto;">
-  <h2>Create New Journal</h2>
-  <form method="POST">
+  <h2>Create a New Journal</h2>
+
+  <div style="margin-top: 20px;">
+    <a href="{% url 'journal_list' %}" id="backBtn">← Back to Journals</a>
+  </div>
+
+  <form method="POST" id="createForm">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit">Save Journal</button>
   </form>
 </div>
+
+<script>
+  let formChanged = false;
+  let skipWarning = false;
+
+  const form = document.getElementById('createForm');
+
+  form.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      formChanged = true;
+    });
+  });
+
+  form.addEventListener('submit', () => {
+    skipWarning = true;
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (formChanged && !skipWarning) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+</script>
 {% endblock %}

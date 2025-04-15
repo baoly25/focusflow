@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 style="text-align: center;">Your Saved Tips</h2>
+<h2 style="text-align: center;">Saved Stress Tips</h2>
 
-<div style="max-width: 700px; margin: 20px auto;">
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="{% url 'stress_tips' %}">← Back to Tips</a>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto;">
   {% for tip in tips %}
-    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-      <h3>{{ tip.title }}</h3>
+    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+      <h4>{{ tip.title }}</h4>
       <p>{{ tip.content }}</p>
+
+      <form method="POST" action="{% url 'toggle_tip_like' tip.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm">❌ Unsave</button>
+      </form>
     </div>
   {% empty %}
-    <p>You haven’t saved any tips yet.</p>
+    <p style="text-align: center;">You haven't saved any stress tips yet.</p>
   {% endfor %}
 </div>
 {% endblock %}

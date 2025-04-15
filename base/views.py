@@ -7,7 +7,7 @@ from django.shortcuts import render
 from .models import Journal
 from .forms import JournalForm
 from django.contrib.auth.decorators import login_required
-from .models import StressTip, TipLike, TipComment
+from .models import StressTip, TipComment
 from .forms import TipCommentForm
 from .models import Affirmation, AffirmationComment
 from .forms import AffirmationCommentForm
@@ -72,37 +72,33 @@ def journal_edit(request, pk):
 
 @login_required
 def stress_tips_list(request):
-    tips = StressTip.objects.all().order_by('-id')
-    liked_tip_ids = TipLike.objects.filter(user=request.user).values_list('tip_id', flat=True)
-    return render(request, 'tips/list.html', {
-        'tips': tips,
-        'liked_tip_ids': liked_tip_ids,
-        'comment_form': TipCommentForm()
-    })
+    tips = StressTip.objects.all()
+    return render(request, 'tips/list.html', {'tips': tips})
 
 @login_required
-def toggle_tip_like(request, tip_id):
-    tip = get_object_or_404(StressTip, id=tip_id)
-    like, created = TipLike.objects.get_or_create(user=request.user, tip=tip)
-    if not created:
-        like.delete()  # if already liked, unlike
+@require_POST
+def submit_tip_comment(request, tip_id):
+    tip = get_object_or_404(StressTip, pk=tip_id)
+    form = TipCommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.tip = tip
+        comment.user = request.user
+        comment.save()
     return redirect('stress_tips')
 
 @login_required
-def submit_tip_comment(request, tip_id):
-    tip = get_object_or_404(StressTip, id=tip_id)
-    if request.method == 'POST':
-        form = TipCommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.tip = tip
-            comment.save()
+def toggle_tip_like(request, tip_id):
+    tip = get_object_or_404(StressTip, pk=tip_id)
+    if request.user in tip.liked_by.all():
+        tip.liked_by.remove(request.user)
+    else:
+        tip.liked_by.add(request.user)
     return redirect('stress_tips')
 
 @login_required
 def saved_tips(request):
-    tips = StressTip.objects.filter(tiplike__user=request.user)
+    tips = request.user.liked_tips.all()
     return render(request, 'tips/saved.html', {'tips': tips})
 
 @login_required
@@ -129,12 +125,33 @@ def toggle_affirmation_like(request, affirmation_id):
         affirmation.liked_by.remove(request.user)
     else:
         affirmation.liked_by.add(request.user)
-    return redirect('affirmations')  # Redirects back to the list page
+    return redirect('affirmations')
 
 @login_required
 def saved_affirmations(request):
     affirmations = request.user.liked_affirmations.all()
     return render(request, 'affirmations/saved.html', {'affirmations': affirmations})
+
+
+from django.http import HttpResponseForbidden
+
+@login_required
+@require_POST
+def delete_affirmation_comment(request, comment_id):
+    comment = get_object_or_404(AffirmationComment, id=comment_id, user=request.user)
+    comment.delete()
+    return redirect('affirmations')
+
+@login_required
+@require_POST
+def delete_tip_comment(request, comment_id):
+    comment = get_object_or_404(TipComment, id=comment_id, user=request.user)
+    comment.delete()
+    return redirect('stress_tips')
+
+
+
+
 
 def relaxation_list(request):
     techniques = [

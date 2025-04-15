@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <h2 style="text-align: center;">{{ technique.title }}</h2>
+
+<div style="margin: 0 auto; max-width: 800px; text-align: left;">
+  <a href="{% url 'relaxation_list' %}" style="text-decoration: none; font-weight: bold;">← Back to Techniques</a>
+</div>
 
 <div style="max-width: 800px; margin: 30px auto;">
   {% for section in technique.sections %}

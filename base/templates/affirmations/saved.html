@@ -2,11 +2,20 @@
 {% block content %}
 <h2 style="text-align: center;">Saved Affirmations</h2>
 
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="{% url 'affirmations' %}">← Back to Affirmations</a>
+</div>
+
 <div style="max-width: 800px; margin: 0 auto;">
   {% for affirmation in affirmations %}
     <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
       <h4>{{ affirmation.title }}</h4>
       <p>{{ affirmation.content }}</p>
+
+      <form method="POST" action="{% url 'toggle_affirmation_like' affirmation.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm">❌ Unsave</button>
+      </form>
     </div>
   {% empty %}
     <p style="text-align: center;">You haven't saved any affirmations yet.</p>

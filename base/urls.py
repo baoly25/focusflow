@@ -6,7 +6,8 @@ from .views import (
     stress_tips_list, toggle_tip_like, submit_tip_comment, saved_tips,
     affirmation_list, submit_affirmation_comment,
     toggle_affirmation_like, saved_affirmations, relaxation_list,
-    relaxation_detail, journal_delete
+    relaxation_detail, journal_delete, delete_affirmation_comment, delete_tip_comment,
+    
 )
 
 urlpatterns = [
@@ -26,12 +27,15 @@ urlpatterns = [
     path('tips/<int:tip_id>/like/', toggle_tip_like, name='toggle_tip_like'),
     path('tips/<int:tip_id>/comment/', submit_tip_comment, name='submit_tip_comment'),
     path('tips/saved/', saved_tips, name='saved_tips'),
+    path('tips/comment/<int:comment_id>/delete/', delete_tip_comment, name='delete_tip_comment'),
+
 
     # affirmations
     path('affirmations/', affirmation_list, name='affirmations'),
     path('affirmations/<int:affirmation_id>/comment/', submit_affirmation_comment, name='submit_affirmation_comment'),
     path('affirmations/<int:affirmation_id>/like/', toggle_affirmation_like, name='toggle_affirmation_like'),
     path('affirmations/saved/', saved_affirmations, name='saved_affirmations'),
+    path('affirmations/comment/<int:comment_id>/delete/', delete_affirmation_comment, name='delete_affirmation_comment'),
     
 
     path('relaxation/', relaxation_list, name='relaxation_list'),

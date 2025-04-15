@@ -2,35 +2,50 @@
 {% block content %}
 <h2 style="text-align: center;">Stress Management Tips</h2>
 
-<div style="text-align: center;">
-    <a href="{% url 'saved_tips' %}">View Saved Tips</a>
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="{% url 'saved_tips' %}" class="btn" style="text-decoration: none; font-weight: bold;">⭐ View Saved</a>
 </div>
 
-<div style="max-width: 700px; margin: 20px auto;">
+<div style="max-width: 800px; margin: 0 auto;">
   {% for tip in tips %}
-    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-      <h3>{{ tip.title }}</h3>
+    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+      <h4>{{ tip.title }}</h4>
       <p>{{ tip.content }}</p>
 
-      <form method="post" action="{% url 'toggle_tip_like' tip.id %}" style="display: inline;">
+      <form method="POST" action="{% url 'toggle_tip_like' tip.id %}" style="display: inline;">
         {% csrf_token %}
-        <button type="submit">
-          {% if tip.id in liked_tip_ids %}★ Saved{% else %}☆ Save{% endif %}
+        <button type="submit" class="btn btn-sm">
+          {% if user in tip.liked_by.all %}
+            ⭐ Saved
+          {% else %}
+            ☆ Save
+          {% endif %}
         </button>
       </form>
 
-      <form method="post" action="{% url 'submit_tip_comment' tip.id %}" style="margin-top: 10px;">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit">Comment</button>
-      </form>
-
       <div style="margin-top: 10px;">
-        {% for comment in tip.tipcomment_set.all %}
-          <p style="margin: 5px 0;"><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
-        {% empty %}
-          <p>No comments yet.</p>
-        {% endfor %}
+        <strong>Comments:</strong>
+        <ul>
+          {% for comment in tip.tipcomment_set.all %}
+            <li>
+              {{ comment.user.username }}: {{ comment.text }}
+              {% if comment.user == request.user %}
+                <form method="POST" action="{% url 'delete_tip_comment' comment.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">🗑️</button>
+                </form>
+              {% endif %}
+            </li>
+          {% empty %}
+            <li>No comments yet.</li>
+          {% endfor %}
+        </ul>
+
+        <form method="POST" action="{% url 'submit_tip_comment' tip.id %}">
+          {% csrf_token %}
+          <input type="text" name="text" placeholder="Add a comment..." style="width: 70%;" required>
+          <button type="submit">Post</button>
+        </form>
       </div>
     </div>
   {% endfor %}

@@ -43,62 +43,73 @@
 </style>
 
 {% if request.user.is_authenticated %}
-    <h2 style="text-align: center;">Welcome back, {{ request.user.username }}</h2>
+  <h2 style="text-align: center;">Welcome Back, {{ request.user.username }}!</h2>
+
+  <div class="grid">
+    <div class="card">
+      <a href="{% url 'timer' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Timer" alt="Timer">
+        <h4>Pomodoro Timer</h4>
+        <p>Timer with intervals of breaks and work time to maximize productivity.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="{% url 'journal_list' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Journal" alt="Journal">
+        <h4>Journaling</h4>
+        <p>Write your thoughts and track your emotional wellness.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="{% url 'stress_tips' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Stress" alt="Stress Tips">
+        <h4>Stress Management Tips</h4>
+        <p>Scroll tips, save your favorites, and add comments.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="{% url 'affirmations' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Affirmations" alt="Affirmations">
+        <h4>Daily Affirmations</h4>
+        <p>Uplifting thoughts to start your day positively and boost your mindset.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="{% url 'relaxation_list' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Relaxation" alt="Relaxation">
+        <h4>Guided Relaxation</h4>
+        <p>Choose from a variety of relaxation techniques with video guidance.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="{% url 'task_list' %}">
+        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Tasks" alt="Task Scheduler">
+        <h4>Task Scheduler</h4>
+        <p>Add, schedule, and track tasks. Mark them as done or view completed tasks.</p>
+      </a>
+    </div>
+  </div>
+
 {% else %}
-    <h2 style="text-align: center;">Explore Our Features!</h2>
+  <div style="max-width: 700px; margin: 50px auto; text-align: center;">
+    <h2>Welcome!</h2>
+    <p>FocusFlow is your all-in-one wellness and productivity dashboard.</p>
+    <p>Log in or sign up to start using features like:</p>
+    <ul style="text-align: left; display: inline-block;">
+      <li>Pomodoro Timer for focused work sessions</li>
+      <li>Personal Journaling to reflect on your day</li>
+      <li>Stress Management Tips to help you cope</li>
+      <li>Daily Affirmations for a positive mindset</li>
+      <li>Guided Relaxation videos to calm your mind</li>
+      <li>Task Scheduler to plan your day and stay on track</li>
+    </ul>
+    <p><a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">create an account</a> to get started.</p>
+  </div>
 {% endif %}
-
-
-
-<div class="grid">
-  <div class="card">
-    <a href="{% url 'timer' %}">
-      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Timer" alt="Timer">
-      <h4>Pomodoro Timer</h4>
-      <p>Timer with intervals of breaks and work time to maximize productivity.</p>
-    </a>
-  </div>
-
-  <div class="card">
-    <a href="{% url 'journal_list' %}">
-      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Journal" alt="Journal">
-      <h4>Journaling</h4>
-      <p>Write your thoughts and track your emotional wellness.</p>
-    </a>
-  </div>
-
-  <div class="card">
-    <a href="{% url 'stress_tips' %}">
-      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Stress" alt="Stress Tips">
-      <h4>Stress Management Tips</h4>
-      <p>Scroll tips, save your favorites, and add comments.</p>
-    </a>
-  </div>
-
-  <div class="card">
-    <a href="{% url 'affirmations' %}">
-      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Affirmations" alt="Affirmations">
-      <h4>Daily Affirmations</h4>
-      <p>Uplifting thoughts to start your day positively and boost your mindset.</p>
-    </a>
-  </div>
-
-  <div class="card">
-    <a href="{% url 'relaxation_list' %}">
-      <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Relaxation" alt="Relaxation">
-      <h4>Guided Relaxation</h4>
-      <p>Choose from a variety of relaxation techniques with video guidance.</p>
-    </a>
-  </div>
-
-  {% for i in "6" %}
-  <div class="card">
-    <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png?text=Feature+{{ i }}" alt="Feature {{ i }}">
-    <h4>Feature {{ i }}</h4>
-    <p>Description</p>
-  </div>
-  {% endfor %}
-</div>
-
 {% endblock %}
 

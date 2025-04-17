@@ -13,6 +13,9 @@ from .models import Affirmation, AffirmationComment
 from .forms import AffirmationCommentForm
 from django.views.decorators.http import require_POST
 from django.shortcuts import redirect
+from .forms import EditProfileForm
+from .models import Task
+from .forms import TaskForm
 
 def register(request):
     if request.method == 'POST':
@@ -209,23 +212,6 @@ def journal_delete(request, pk):
     journal.delete()
     return redirect('journal_list')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-from .models import Task
-from .forms import TaskForm
-from django.utils import timezone
-
 @login_required
 def task_list(request):
     tasks = Task.objects.filter(user=request.user, completed=False).order_by('due_date')
@@ -281,3 +267,18 @@ def task_undo(request, pk):
     task.completed = False
     task.save()
     return redirect('completed_tasks')
+
+@login_required
+def user_settings(request):
+    return render(request, 'settings.html')
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_settings')
+    else:
+        form = EditProfileForm(instance=request.user)
+    return render(request, 'edit_profile.html', {'form': form})

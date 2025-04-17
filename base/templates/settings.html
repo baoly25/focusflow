@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align: center;">
+    <h2>User Settings</h2>
+    <button class="toggle-btn" onclick="toggleMode()" id="modeToggle">🌙 Dark Mode</button>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'edit_profile' %}" class="btn">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}

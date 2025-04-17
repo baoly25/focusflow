@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Journal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='journals')
@@ -9,12 +12,6 @@ class Journal(models.Model):
 
     def __str__(self):
         return self.title
-
-
-
-
-
-
 
 class StressTip(models.Model):
     title = models.CharField(max_length=100)
@@ -44,32 +41,12 @@ class AffirmationComment(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-
-
-
-
-
-
-
-
-
 class RelaxationTechnique(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
-
-from django.db import models
-from django.contrib.auth.models import User
-from django.utils import timezone
 
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
@@ -84,4 +61,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
-    

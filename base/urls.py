@@ -1,5 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
 from .views import (
     register, login_view, homepage, pomodoro_timer,
     journal_list, journal_create, journal_edit,
@@ -9,6 +10,8 @@ from .views import (
     relaxation_detail, journal_delete, delete_affirmation_comment, delete_tip_comment,
 
     task_list, task_create, task_complete, completed_tasks, task_delete, task_edit, task_undo,
+
+    user_settings, edit_profile
 )
 
 urlpatterns = [
@@ -53,5 +56,9 @@ urlpatterns = [
     path('tasks/<int:pk>/edit/', task_edit, name='task_edit'),
     path('tasks/<int:pk>/undo/', task_undo, name='task_undo'),
 
-
+    #settings
+    path('settings/', user_settings, name='user_settings'),
+    path('settings/edit-profile/', edit_profile, name='edit_profile'),
+    path('settings/password/', auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html'), name='change_password'),
+    path('settings/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/change_password_done.html'), name='password_change_done'),
 ]

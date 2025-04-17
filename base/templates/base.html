@@ -2,8 +2,27 @@
 <html>
 <head>
     <title>FocusFlow</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body.light-mode {
+          background-color: #ffffff;
+          color: #000000;
+        }
+      
+        body.dark-mode {
+          background-color: #121212;
+          color: #ffffff;
+        }
+      
+        .toggle-btn {
+          cursor: pointer;
+          padding: 6px 12px;
+          font-size: 0.9rem;
+          border: 1px solid #ccc;
+          background-color: transparent;
+          color: inherit;
+          border-radius: 5px;
+        }
+      </style>
 </head>
 <body>
     <header style="position: relative; padding: 20px; text-align: center;">
@@ -17,6 +36,7 @@
                     {% csrf_token %}
                     <button type="submit" style=" background: none; border: none; color: #007bff; cursor: pointer; margin-right: 10px;">Log Out</button>
                 </form>
+                <a href="{% url 'user_settings' %}">Settings</a>
                 <img src="https://cdn.nba.com/teams/legacy/i.cdn.turner.com/drp/nba/cavaliers/sites/default/files/2017_lebron_james.png" alt="User" style="width: 40px; height: 40px; border-radius: 50%;">
             {% else %}
                 <a href="{% url 'login' %}" style="margin-right: 10px;">Sign In</a>
@@ -37,5 +57,33 @@
     <footer style="text-align: center; margin-top: 40px;">
         <p>&copy; 2025 FocusFlow</p>
     </footer>
+
+    <script>
+        const mode = localStorage.getItem('mode') || 'light';
+        document.body.classList.add(mode + '-mode');
+      
+        window.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('modeToggle');
+          if (btn) {
+            btn.textContent = mode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+          }
+        });
+      
+        function toggleMode() {
+          const body = document.body;
+          const currentMode = body.classList.contains('dark-mode') ? 'dark' : 'light';
+          const newMode = currentMode === 'dark' ? 'light' : 'dark';
+          
+          body.classList.remove(currentMode + '-mode');
+          body.classList.add(newMode + '-mode');
+          localStorage.setItem('mode', newMode);
+      
+          const btn = document.getElementById('modeToggle');
+          if (btn) {
+            btn.textContent = newMode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+          }
+        }
+      </script>
+      
 </body>
 </html>

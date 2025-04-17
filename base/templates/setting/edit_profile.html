@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align: center;">Edit Profile</h2>
+
+<div style="max-width: 500px; margin: 0 auto;">
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+
+  <div style="margin-top: 20px;">
+    <a href="{% url 'settings' %}">← Back to Settings</a>
+  </div>
+</div>
+{% endblock %}

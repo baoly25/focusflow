@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
-from django import forms
 from .models import Journal
 from .models import TipComment
 from .models import AffirmationComment
+from .models import Task
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
@@ -60,16 +60,6 @@ class AffirmationCommentForm(forms.ModelForm):
         model = AffirmationComment
         fields = ['text']
 
-
-
-
-
-
-
-
-from django import forms
-from .models import Task
-
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
@@ -78,4 +68,15 @@ class TaskForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Task Title'}),
             'notes': forms.Textarea(attrs={'placeholder': 'Additional notes...'}),
             'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
         }

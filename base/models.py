@@ -59,3 +59,29 @@ class RelaxationTechnique(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+
+class Task(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
+    title = models.CharField(max_length=200)
+    notes = models.TextField(blank=True)
+    due_date = models.DateTimeField()
+    completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_due_soon(self):
+        return not self.completed and (self.due_date - timezone.now()).total_seconds() <= 86400
+
+    def __str__(self):
+        return self.title
+    

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align: center;">Completed Tasks</h2>
+
+<div style="max-width: 600px; margin: 0 auto;">
+  <a href="{% url 'task_list' %}">← Back to Tasks</a>
+</div>
+
+<br>
+
+<div style="max-width: 600px; margin: 0 auto;">
+  {% for task in tasks %}
+    <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
+      <strong>{{ task.title }}</strong><br>
+      <small>Completed. Due was: {{ task.due_date }}</small>
+      {% if task.notes %}
+        <p>{{ task.notes }}</p>
+        <form method="POST" action="{% url 'task_undo' task.pk %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Undo</button>
+        </form>          
+      {% endif %}
+    </div>
+  {% empty %}
+    <p style="text-align: center;">No tasks completed yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

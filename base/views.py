@@ -14,7 +14,6 @@ from .forms import AffirmationCommentForm
 from django.views.decorators.http import require_POST
 from django.shortcuts import redirect
 
-
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -149,10 +148,6 @@ def delete_tip_comment(request, comment_id):
     comment.delete()
     return redirect('stress_tips')
 
-
-
-
-
 def relaxation_list(request):
     techniques = [
         {
@@ -213,3 +208,76 @@ def journal_delete(request, pk):
     journal = get_object_or_404(Journal, pk=pk, user=request.user)
     journal.delete()
     return redirect('journal_list')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from .models import Task
+from .forms import TaskForm
+from django.utils import timezone
+
+@login_required
+def task_list(request):
+    tasks = Task.objects.filter(user=request.user, completed=False).order_by('due_date')
+    return render(request, 'tasks/list.html', {'tasks': tasks})
+
+@login_required
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            return redirect('task_list')
+    else:
+        form = TaskForm()
+    return render(request, 'tasks/create.html', {'form': form})
+
+@login_required
+def task_complete(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    task.completed = True
+    task.save()
+    return redirect('task_list')
+
+@login_required
+def completed_tasks(request):
+    tasks = Task.objects.filter(user=request.user, completed=True).order_by('-due_date')
+    return render(request, 'tasks/completed.html', {'tasks': tasks})
+
+@login_required
+def task_delete(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    task.delete()
+    return redirect('task_list')
+
+@login_required
+def task_edit(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task_list')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'tasks/edit.html', {'form': form, 'task': task})
+
+@login_required
+@require_POST
+def task_undo(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)
+    task.completed = False
+    task.save()
+    return redirect('completed_tasks')

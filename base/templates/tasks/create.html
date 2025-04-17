@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align: center;">Add a New Task</h2>
+
+<div style="max-width: 600px; margin: 0 auto;">
+  <div style="margin-bottom: 20px;">
+    <a href="{% url 'task_list' %}" id="backBtn">← Back to Tasks</a>
+  </div>
+
+  <form method="POST" id="createTaskForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Task</button>
+  </form>
+</div>
+
+<script>
+  let formChanged = false;
+  let skipWarning = false;
+
+  const form = document.getElementById('createTaskForm');
+
+  form.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      formChanged = true;
+    });
+  });
+
+  form.addEventListener('submit', () => {
+    skipWarning = true;
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (formChanged && !skipWarning) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+</script>
+{% endblock %}

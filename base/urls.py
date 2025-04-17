@@ -7,7 +7,8 @@ from .views import (
     affirmation_list, submit_affirmation_comment,
     toggle_affirmation_like, saved_affirmations, relaxation_list,
     relaxation_detail, journal_delete, delete_affirmation_comment, delete_tip_comment,
-    
+
+    task_list, task_create, task_complete, completed_tasks, task_delete, task_edit, task_undo,
 )
 
 urlpatterns = [
@@ -42,4 +43,15 @@ urlpatterns = [
     path('relaxation/<slug:technique_slug>/', relaxation_detail, name='relaxation_detail'),
 
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+
+    # tasks
+    path('tasks/', task_list, name='task_list'),
+    path('tasks/new/', task_create, name='task_create'),
+    path('tasks/<int:pk>/complete/', task_complete, name='task_complete'),
+    path('tasks/completed/', completed_tasks, name='completed_tasks'),
+    path('tasks/<int:pk>/delete/', task_delete, name='task_delete'),
+    path('tasks/<int:pk>/edit/', task_edit, name='task_edit'),
+    path('tasks/<int:pk>/undo/', task_undo, name='task_undo'),
+
+
 ]

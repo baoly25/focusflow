@@ -1,115 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 40px auto;
-  }
-
-  .card {
-    background: white;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-
-  .card img {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    height: 120px;
-    object-fit: cover;
-  }
-
-  .card h4 {
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    color: #555;
-  }
-
-  .card a {
-    color: black;
-    text-decoration: none;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
 {% if request.user.is_authenticated %}
-  <h2 style="text-align: center;">Welcome Back, {{ request.user.username }}!</h2>
-
+  <h2 class="homepage-heading">Welcome Back, {{ request.user.username }}!</h2>
   <div class="grid">
     <div class="card">
       <a href="{% url 'timer' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Timer" alt="Timer">
+        <img src="https://cdn.pixabay.com/photo/2020/05/20/00/45/time-5193038_1280.jpg" alt="Timer">
         <h4>Pomodoro Timer</h4>
-        <p>Timer with intervals of breaks and work time to maximize productivity.</p>
+        <p>Intervals of breaks and work to boost productivity.</p>
       </a>
     </div>
-
     <div class="card">
       <a href="{% url 'journal_list' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Journal" alt="Journal">
+        <img src="https://cdn.pixabay.com/photo/2016/01/09/18/28/notebook-1130742_1280.jpg" alt="Journal">
         <h4>Journaling</h4>
         <p>Write your thoughts and track your emotional wellness.</p>
       </a>
     </div>
-
     <div class="card">
       <a href="{% url 'stress_tips' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Stress" alt="Stress Tips">
-        <h4>Stress Management Tips</h4>
-        <p>Scroll tips, save your favorites, and add comments.</p>
+        <img src="https://cdn.pixabay.com/photo/2018/03/25/13/43/garbage-3259455_1280.jpg" alt="Stress Tips">
+        <h4>Stress Tips</h4>
+        <p>Scroll tips, save favorites, and comment.</p>
       </a>
     </div>
-
     <div class="card">
       <a href="{% url 'affirmations' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Affirmations" alt="Affirmations">
-        <h4>Daily Affirmations</h4>
-        <p>Uplifting thoughts to start your day positively and boost your mindset.</p>
+        <img src="https://cdn.pixabay.com/photo/2017/04/19/20/10/morning-2243465_1280.jpg" alt="Affirmations">
+        <h4>Affirmations</h4>
+        <p>Daily thoughts to boost your mindset.</p>
       </a>
     </div>
-
     <div class="card">
       <a href="{% url 'relaxation_list' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Relaxation" alt="Relaxation">
-        <h4>Guided Relaxation</h4>
-        <p>Choose from a variety of relaxation techniques with video guidance.</p>
+        <img src="https://cdn.pixabay.com/photo/2020/02/26/15/19/meditate-4882027_1280.jpg" alt="Relaxation">
+        <h4>Relaxation</h4>
+        <p>Pick from guided relaxation techniques.</p>
       </a>
     </div>
-
     <div class="card">
       <a href="{% url 'task_list' %}">
-        <img src="https://i1.sndcdn.com/artworks-9R6zUytOmPor6P2n-8tUdCw-t1080x1080.jpg?text=Tasks" alt="Task Scheduler">
+        <img src="https://cdn.pixabay.com/photo/2017/01/18/17/52/calendar-1990453_1280.jpg" alt="Task Scheduler">
         <h4>Task Scheduler</h4>
-        <p>Add, schedule, and track tasks. Mark them as done or view completed tasks.</p>
+        <p>Add, schedule, and manage your tasks.</p>
       </a>
     </div>
   </div>
-
 {% else %}
-  <div style="max-width: 700px; margin: 50px auto; text-align: center;">
-    <h2>Welcome!</h2>
-    <p>FocusFlow is your all-in-one wellness and productivity dashboard.</p>
-    <p>Log in or sign up to start using features like:</p>
-    <ul style="text-align: left; display: inline-block;">
-      <li>Pomodoro Timer for focused work sessions</li>
-      <li>Personal Journaling to reflect on your day</li>
-      <li>Stress Management Tips to help you cope</li>
-      <li>Daily Affirmations for a positive mindset</li>
-      <li>Guided Relaxation videos to calm your mind</li>
-      <li>Task Scheduler to plan your day and stay on track</li>
-    </ul>
-    <p><a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">create an account</a> to get started.</p>
+  <div class="welcome-container">
+    <h2 class="welcome-title">Welcome to FocusFlow</h2>
+    <p class="welcome-intro">A calming dashboard to help you stay organized and grounded every day.</p>
+
+    <div class="welcome-highlights">
+      <ul>
+        <li><strong>Pomodoro Timer</strong> - Stay focused using structured work and break cycles</li>
+        <li><strong>Journal Entries</strong> - Reflect on your thoughts and experiences</li>
+        <li><strong>Stress Tips</strong> - Scroll and save simple stress-relief advice</li>
+        <li><strong>Daily Affirmations</strong> - Uplift your mindset with positive words</li>
+        <li><strong>Relaxation Videos</strong> - Follow guided breathing or meditation</li>
+        <li><strong>Task Scheduler</strong> - Add and track your to-dos easily</li>
+      </ul>
+    </div>
+
+    <div class="welcome-cta">
+      <p><a href="{% url 'login' %}" class="nav-link">Sign in</a> or <a href="{% url 'register' %}" class="nav-link">create an account</a> to begin.</p>
+    </div>
   </div>
 {% endif %}
 {% endblock %}
-

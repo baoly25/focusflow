@@ -1,89 +1,73 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>FocusFlow</title>
-    <style>
-        body.light-mode {
-          background-color: #ffffff;
-          color: #000000;
-        }
-      
-        body.dark-mode {
-          background-color: #121212;
-          color: #ffffff;
-        }
-      
-        .toggle-btn {
-          cursor: pointer;
-          padding: 6px 12px;
-          font-size: 0.9rem;
-          border: 1px solid #ccc;
-          background-color: transparent;
-          color: inherit;
-          border-radius: 5px;
-        }
-      </style>
+    <link rel="stylesheet" href="{% static 'styles/default.css' %}">
 </head>
 <body>
-    <header style="position: relative; padding: 20px; text-align: center;">
-        <h1 style="margin: 0; font-size: 2rem;">
-            <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">FocusFlow</a>
-        </h1>
-    
-        <div style="position: absolute; top: 20px; right: 20px;">
-            {% if request.user.is_authenticated %}
-                <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" style=" background: none; border: none; color: #007bff; cursor: pointer; margin-right: 10px;">Log Out</button>
-                </form>
-                <a href="{% url 'user_settings' %}">Settings</a>
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="User" style="width: 40px; height: 40px; border-radius: 50%;">
-            {% else %}
-                <a href="{% url 'login' %}" style="margin-right: 10px;">Sign In</a>
-                <a href="{% url 'register' %}">Sign Up</a>
-            {% endif %}
-        </div>
-    
-        <div style="position: absolute; top: 20px; left: 20px;">
-            <a href="{% url 'home' %}" style="color: #007bff; text-decoration: none;">Home</a>
-        </div>
-    </header>
+  <header class="main-header">
+    <div class="header-left">
+      <a href="{% url 'home' %}" class="nav-link">Home</a>
+    </div>
+  
+    <div class="header-center">
+      <a href="{% url 'home' %}" class="site-title">FocusFlow</a>
+    </div>
+  
+    <div class="header-right">
+      {% if request.user.is_authenticated %}
+      
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="nav-button">Log Out</button>
+        </form>
 
-    <main>
+        <a href="{% url 'user_settings' %}" class="nav-link">Settings</a>
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+             alt="User" class="user-avatar">
+      {% else %}
+        <a href="{% url 'login' %}" class="nav-link">Sign In</a>
+        <a href="{% url 'register' %}" class="nav-link">Sign Up</a>
+      {% endif %}
+    </div>
+  </header>
+
+    <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer style="text-align: center; margin-top: 40px;">
+    <footer class="main-footer">
         <p>&copy; 2025 FocusFlow</p>
     </footer>
 
     <script>
         const mode = localStorage.getItem('mode') || 'light';
         document.body.classList.add(mode + '-mode');
-      
+
         window.addEventListener('DOMContentLoaded', () => {
-          const btn = document.getElementById('modeToggle');
-          if (btn) {
-            btn.textContent = mode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
-          }
+            const btn = document.getElementById('modeToggle');
+            if (btn) {
+                btn.textContent = mode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+            }
         });
-      
+
         function toggleMode() {
-          const body = document.body;
-          const currentMode = body.classList.contains('dark-mode') ? 'dark' : 'light';
-          const newMode = currentMode === 'dark' ? 'light' : 'dark';
-          
-          body.classList.remove(currentMode + '-mode');
-          body.classList.add(newMode + '-mode');
-          localStorage.setItem('mode', newMode);
-      
-          const btn = document.getElementById('modeToggle');
-          if (btn) {
-            btn.textContent = newMode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
-          }
+            const body = document.body;
+            const currentMode = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const newMode = currentMode === 'dark' ? 'light' : 'dark';
+
+            body.classList.remove(currentMode + '-mode');
+            body.classList.add(newMode + '-mode');
+            localStorage.setItem('mode', newMode);
+
+            const btn = document.getElementById('modeToggle');
+            if (btn) {
+                btn.textContent = newMode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+            }
         }
-      </script>
-      
+    </script>
 </body>
 </html>

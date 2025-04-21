@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div style="text-align: center;">
-    <h2>User Settings</h2>
-    <button class="toggle-btn" onclick="toggleMode()" id="modeToggle">🌙 Dark Mode</button>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-    <div style="margin-top: 20px;">
-        <a href="{% url 'edit_profile' %}" class="btn">Edit Profile</a>
-    </div>
+<h2 class="settings-title">User Settings</h2>
 
-    <div style="margin-top: 20px;">
-        <a href="{% url 'progress_tracker' %}" class="btn">Check Progress</a>
+<div class="settings-wrapper">
+    
+
+    <div class="settings-links">
+        <button class="toggle-btn" onclick="toggleMode()" id="modeToggle">🌙 Dark Mode</button>
+
+        <a href="{% url 'edit_profile' %}" class="nav-button">Edit Profile</a>
+
+        <a href="{% url 'progress_tracker' %}" class="nav-button">Check Progress</a>
     </div>
 </div>
 {% endblock %}

@@ -146,7 +146,7 @@ a {
 
 .toggle-btn {
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 4px 8px;
   font-size: 0.9rem;
   border: 1px solid #ccc;
   background-color: transparent;
@@ -176,6 +176,7 @@ a {
   font-size: 1.8rem;
   margin-bottom: 12px;
   color: #1e3a8a;
+  text-align: center;
 }
 
 .welcome-intro {
@@ -373,4 +374,194 @@ a {
 
 .signup-div {
     text-align: left;
+}
+
+/* settings.html */
+.settings-wrapper {
+  text-align: center;
+  max-width: 600px;
+  margin: 60px auto;
+  background-color: #f0f4ff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #cdd8e5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.settings-title {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+.settings-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+  align-items: center;
+}
+
+
+/* journal */
+.journal-list-wrapper {
+  max-width: 700px;
+  margin: 60px auto;
+  background-color: #f0f4ff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #cdd8e5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.journal-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e3a8a;
+}
+
+.journal-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.journal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #d6e1ec;
+}
+
+.journal-link {
+  color: #1e3a8a;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.journal-link:hover {
+  text-decoration: underline;
+}
+
+.delete-form {
+  display: inline;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: #d11a2a;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.delete-btn:hover {
+  text-decoration: underline;
+}
+
+.journal-empty {
+  margin-top: 20px;
+  text-align: center;
+  color: #444;
+}
+
+.journal-form-wrapper {
+  max-width: 700px;
+  margin: 60px auto;
+  background-color: #f0f4ff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #cdd8e5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.journal-form {
+  margin-top: 20px;
+}
+
+.journal-form input[type="text"],
+.journal-form textarea {
+  width: 97%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.journal-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+
+/* progress.html */
+.progress-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.progress-container {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.back-link {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.progress-box {
+  border: 1px solid #cbd6e2;
+  background-color: #f0f4ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.progress-box h4 {
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+.progress-count {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+/* edit profile */
+.form-wrapper {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #f0f4ff;
+  border: 1px solid #cbd6e2;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.form-wrapper input,
+.form-wrapper select,
+.form-wrapper textarea {
+  width: 96%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.form-wrapper p span.helptext {
+  display: none;
 }

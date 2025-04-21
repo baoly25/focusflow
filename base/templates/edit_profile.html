@@ -1,18 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2>Edit Profile</h2>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-<div style="margin-top: 20px;">
-    <a href="{% url 'user_settings' %}">← Back to Settings</a>
+<h2 class="homepage-heading">Edit Profile</h2>
+
+<div class="form-container">
+
+  <div class="back-link" style="margin-bottom: 20px;">
+    <a href="{% url 'user_settings' %}" class="nav-link">← Back to Settings</a>
+  </div>
+
+  <form method="POST" id="editForm" class="form-wrapper">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="nav-button" style="width: 100%;">Save Changes</button>
+  </form>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'change_password' %}" class="nav-link">Change Password</a>
+  </div>
+
 </div>
-
-<form method="POST" id="editForm">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save Changes</button>
-</form>
-
-<a href="{% url 'change_password' %}">🔒 Change Password</a>
 
 <script>
   let formChanged = false;

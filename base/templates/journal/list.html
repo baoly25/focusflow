@@ -1,25 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div style="max-width: 700px; margin: 0 auto;">
-  <h2>Your Journals</h2>
-  <a href="{% url 'journal_create' %}">+ New Journal</a>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
+
+<h2 class="journal-heading">Your Journals</h2>
+
+<div class="journal-list-wrapper">
+  <a href="{% url 'journal_create' %}" class="nav-button">+ New Journal</a>
+
   {% if journals %}
-    <ul style="margin-top: 20px;">
+    <ul class="journal-list">
       {% for journal in journals %}
-        <li style="margin-bottom: 10px;">
-          <a href="{% url 'journal_edit' journal.pk %}">
+        <li class="journal-item">
+          <a href="{% url 'journal_edit' journal.pk %}" class="journal-link">
             {{ journal.title }} — {{ journal.created_at|date:"M d, Y" }}
           </a>
-          <form action="{% url 'journal_delete' journal.pk %}" method="POST" style="display:inline;">
+          <form action="{% url 'journal_delete' journal.pk %}" method="POST" class="delete-form">
             {% csrf_token %}
-            <button type="submit" onclick="return confirm('Delete this journal?')" style="margin-left: 10px;">Delete</button>
+            <button type="submit" class="delete-btn" onclick="return confirm('Delete this journal?')">Delete</button>
           </form>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>You have no journals yet.</p>
-    <a href="{% url 'journal_create' %}">Create your first journal</a>
+    <p class="journal-empty">You have no journals yet.</p>
+    <a href="{% url 'journal_create' %}" class="nav-link">Create your first journal</a>
   {% endif %}
 </div>
 {% endblock %}

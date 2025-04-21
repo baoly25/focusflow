@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div style="max-width: 700px; margin: 0 auto;">
-  <h2>Edit Journal: {{ journal.title }}</h2>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-  <div style="margin-top: 20px;">
-    <a href="{% url 'journal_list' %}" id="backBtn">← Back to Journals</a>
+<h2 class="journal-heading">Edit Journal: {{ journal.title }}</h2>
+
+<div class="journal-form-wrapper">
+
+  <div style="margin-top: 10px;">
+    <a href="{% url 'journal_list' %}" class="nav-link">← Back to Journals</a>
   </div>
 
-  <form method="POST" id="editForm">
+  <form method="POST" id="editForm" class="journal-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <button type="submit" class="nav-button">Save Changes</button>
   </form>
 </div>
 

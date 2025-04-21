@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-<h2 style="text-align: center;">📈 Your Progress</h2>
+<h2 class="homepage-heading progress-title">Your Progress</h2>
 
-<div style="max-width: 600px; margin: 20px auto; text-align: center;">
-  <div style="margin-bottom: 20px;">
-    <a href="{% url 'user_settings' %}">← Back to Settings</a>
+<br>
+
+<div class="progress-container">
+  <div class="back-link">
+    <a href="{% url 'user_settings' %}" class="nav-link">← Back to Settings</a>
   </div>
 
-  <div style="border: 1px solid #ccc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+  <div class="progress-box">
     <h4>Total Journals Written</h4>
-    <p style="font-size: 1.5rem; font-weight: bold;">{{ journal_count }}</p>
+    <p class="progress-count">{{ journal_count }}</p>
   </div>
 
-  <div style="border: 1px solid #ccc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+  <div class="progress-box">
     <h4>Tasks Completed</h4>
-    <p style="font-size: 1.5rem; font-weight: bold;">{{ completed_tasks }}</p>
+    <p class="progress-count">{{ completed_tasks }}</p>
   </div>
 </div>
 

@@ -1,14 +1,58 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div style="max-width: 400px; margin: auto; padding-top: 60px;">
-    <h2 style="text-align: center;">Sign Up</h2>
-    <form method="post">
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
+
+<div class="auth-container">
+    <h2 class="auth-heading">Sign Up</h2>
+    <form method="post" class="auth-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" style="width: 100%; padding: 10px; background: black; color: white; border: none;">Register</button>
+        <div class="signup-div">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+
+        <br>
+    
+        <div class="signup-div">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+
+        <br>
+    
+        <div class="signup-div">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="error">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+
+        <br>
+    
+        <div class="signup-div">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="error">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+
+        <br>
+    
+        <button type="submit" class="auth-button">Register</button>
     </form>
-    <p style="text-align: center; margin-top: 15px;">
-        Already have an account? <a href="{% url 'login' %}">Log In</a>
+    
+    <p class="auth-footer-text">
+        Already have an account?
+        <a href="{% url 'login' %}" class="nav-link">Log In</a>
     </p>
 </div>
 {% endblock %}

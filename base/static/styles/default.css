@@ -315,3 +315,62 @@ a {
 #longInput {
   width: 96%;
 }
+
+
+/* login.html */
+.auth-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #f0f4ff;
+  border: 1px solid #cdd8e5;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.auth-heading {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #1e3a8a;
+}
+
+.auth-form p {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.auth-form input {
+  width: 95%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-button:hover {
+  background-color: #274ea3;
+}
+
+.auth-footer-text {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.signup-div {
+    text-align: left;
+}

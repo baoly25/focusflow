@@ -6,16 +6,6 @@ body {
   padding: 0;
 }
 
-body.light-mode {
-  background-color: #e9f1f7;
-  color: #222;
-}
-
-body.dark-mode {
-  background-color: #121212;
-  color: #f0f0f0;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -134,7 +124,8 @@ a {
 
 /* Buttons and Nav */
 .nav-button,
-.nav-link {
+.nav-link,
+.timer-settings-btn {
   background-color: #dbeafe;
   border: none;
   padding: 6px 12px;
@@ -147,7 +138,8 @@ a {
 }
 
 .nav-button:hover,
-.nav-link:hover {
+.nav-link:hover,
+.timer-settings-btn:hover {
   background-color: #bfdbfe;
   cursor: pointer;
 }
@@ -168,43 +160,158 @@ a {
   border-radius: 50%;
 }
 
+/* Welcome Panel */
 .welcome-container {
-    max-width: 750px;
-    margin: 60px auto;
-    background-color: #f0f4ff;
-    border: 1px solid #cdd8e5;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    text-align: center;
+  max-width: 750px;
+  margin: 60px auto;
+  background-color: #f0f4ff;
+  border: 1px solid #cdd8e5;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  text-align: center;
 }
 
 .welcome-title {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    color: #1e3a8a;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #1e3a8a;
 }
 
 .welcome-intro {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .welcome-highlights {
-    text-align: left;
-    margin: 0 auto 20px;
-    max-width: 600px;
+  text-align: left;
+  margin: 0 auto 20px;
+  max-width: 600px;
 }
 
 .welcome-highlights ul {
-    padding-left: 20px;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    color: #333;
+  padding-left: 20px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 .welcome-cta {
-    margin-top: 20px;
-    font-size: 1rem;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+/* Pomodoro Timer */
+.timer-wrapper {
+  max-width: 450px;
+  margin: 60px auto;
+  text-align: center;
+  background-color: #f0f4ff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.settings-bar {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.mode-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mode-tab {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  color: inherit;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.mode-tab.active {
+  border-bottom: 3px solid #1e3a8a;
+  color: #1e3a8a;
+}
+
+.timer-display {
+  font-size: 4rem;
+  margin: 30px 0;
+  font-weight: 700;
+  color: inherit;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.timer-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #1e3a8a;
+  background-color: white;
+  color: #1e3a8a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.timer-btn:hover {
+  background-color: #e0ecff;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.modal-content {
+  background: #f0f4ff;
+  width: 90%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.timer-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-buttons {
+  text-align: right;
+  margin-top: 20px;
+}
+
+#pomodoroInput,
+#breakInput,
+#longInput {
+  width: 96%;
 }

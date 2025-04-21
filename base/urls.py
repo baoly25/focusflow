@@ -8,10 +8,9 @@ from .views import (
     affirmation_list, submit_affirmation_comment,
     toggle_affirmation_like, saved_affirmations, relaxation_list,
     relaxation_detail, journal_delete, delete_affirmation_comment, delete_tip_comment,
-
     task_list, task_create, task_complete, completed_tasks, task_delete, task_edit, task_undo,
-
-    user_settings, edit_profile
+    user_settings, edit_profile,
+    progress_tracker,
 )
 
 urlpatterns = [
@@ -33,7 +32,6 @@ urlpatterns = [
     path('tips/saved/', saved_tips, name='saved_tips'),
     path('tips/comment/<int:comment_id>/delete/', delete_tip_comment, name='delete_tip_comment'),
 
-
     # affirmations
     path('affirmations/', affirmation_list, name='affirmations'),
     path('affirmations/<int:affirmation_id>/comment/', submit_affirmation_comment, name='submit_affirmation_comment'),
@@ -44,7 +42,7 @@ urlpatterns = [
 
     path('relaxation/', relaxation_list, name='relaxation_list'),
     path('relaxation/<slug:technique_slug>/', relaxation_detail, name='relaxation_detail'),
-
+    
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 
     # tasks
@@ -56,9 +54,12 @@ urlpatterns = [
     path('tasks/<int:pk>/edit/', task_edit, name='task_edit'),
     path('tasks/<int:pk>/undo/', task_undo, name='task_undo'),
 
-    #settings
+    # settings
     path('settings/', user_settings, name='user_settings'),
     path('settings/edit-profile/', edit_profile, name='edit_profile'),
     path('settings/password/', auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html'), name='change_password'),
     path('settings/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/change_password_done.html'), name='password_change_done'),
+
+    # progress tracking
+    path('settings/progress/', progress_tracker, name='progress_tracker'),
 ]

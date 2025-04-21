@@ -134,9 +134,6 @@ def saved_affirmations(request):
     affirmations = request.user.liked_affirmations.all()
     return render(request, 'affirmations/saved.html', {'affirmations': affirmations})
 
-
-from django.http import HttpResponseForbidden
-
 @login_required
 @require_POST
 def delete_affirmation_comment(request, comment_id):
@@ -282,3 +279,14 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
     return render(request, 'edit_profile.html', {'form': form})
+
+@login_required
+def progress_tracker(request):
+    journal_count = Journal.objects.filter(user=request.user).count()
+    completed_tasks = Task.objects.filter(user=request.user, completed=True).count()
+
+    context = {
+        'journal_count': journal_count,
+        'completed_tasks': completed_tasks,
+    }
+    return render(request, 'progress.html', context)

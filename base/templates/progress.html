@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="text-align: center;">📈 Your Progress</h2>
+
+<div style="max-width: 600px; margin: 20px auto; text-align: center;">
+  <div style="margin-bottom: 20px;">
+    <a href="{% url 'user_settings' %}">← Back to Settings</a>
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+    <h4>Total Journals Written</h4>
+    <p style="font-size: 1.5rem; font-weight: bold;">{{ journal_count }}</p>
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+    <h4>Tasks Completed</h4>
+    <p style="font-size: 1.5rem; font-weight: bold;">{{ completed_tasks }}</p>
+  </div>
+</div>
+
+{% endblock %}

@@ -12,7 +12,6 @@ from .forms import TipCommentForm
 from .models import Affirmation, AffirmationComment
 from .forms import AffirmationCommentForm
 from django.views.decorators.http import require_POST
-from django.shortcuts import redirect
 from .forms import EditProfileForm
 from .models import Task
 from .forms import TaskForm
@@ -92,10 +91,15 @@ def submit_tip_comment(request, tip_id):
 @login_required
 def toggle_tip_like(request, tip_id):
     tip = get_object_or_404(StressTip, pk=tip_id)
+
     if request.user in tip.liked_by.all():
         tip.liked_by.remove(request.user)
     else:
         tip.liked_by.add(request.user)
+
+    referer = request.META.get('HTTP_REFERER')
+    if referer and 'saved' in referer:
+        return redirect('saved_tips')
     return redirect('stress_tips')
 
 @login_required

@@ -643,3 +643,41 @@ a {
 .delete-btn:hover {
   text-decoration: underline;
 }
+
+.relaxation-section {
+  margin-bottom: 40px;
+}
+
+.relaxation-detail-wrapper {
+  max-width: 800px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.relaxation-card {
+  background-color: #f0f4ff;
+  border: 1px solid #cbd6e2;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.session-label {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: #1e3a8a;
+}
+
+.video-container {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.session-desc {
+  font-size: 0.95rem;
+  color: #333;
+}

@@ -127,10 +127,15 @@ def submit_affirmation_comment(request, affirmation_id):
 @login_required
 def toggle_affirmation_like(request, affirmation_id):
     affirmation = get_object_or_404(Affirmation, id=affirmation_id)
+
     if request.user in affirmation.liked_by.all():
         affirmation.liked_by.remove(request.user)
     else:
         affirmation.liked_by.add(request.user)
+
+    referer = request.META.get('HTTP_REFERER')
+    if referer and 'saved' in referer:
+        return redirect('saved_affirmations')
     return redirect('affirmations')
 
 @login_required
@@ -157,19 +162,19 @@ def relaxation_list(request):
         {
             "name": "Deep Breathing",
             "slug": "deep-breathing",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ZPuL7At42tM868IvRLZq-w40Uls7Fq9WXg&s?text=Deep+Breathing",
+            "image": "https://cdn.pixabay.com/photo/2023/06/15/01/37/nature-8064210_1280.png",
             "description": "A calming technique to regulate your breath and reduce anxiety."
         },
         {
-            "name": "Progressive Muscle Relaxation",
+            "name": "PMR",
             "slug": "pmr",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ZPuL7At42tM868IvRLZq-w40Uls7Fq9WXg&s?text=PMR",
-            "description": "Relieve tension by tensing and relaxing each muscle group."
+            "image": "https://cdn.pixabay.com/photo/2022/10/19/22/15/cat-7533717_1280.jpg",
+            "description": "Progressive Muscle Relaxation relieves tension by tensing and relaxing each muscle group."
         },
         {
             "name": "Mindfulness Meditation",
             "slug": "meditation",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ZPuL7At42tM868IvRLZq-w40Uls7Fq9WXg&s?text=Meditation",
+            "image": "https://cdn.pixabay.com/photo/2022/11/17/03/20/woman-7597270_1280.jpg",
             "description": "Focus on the present moment to ease your mind and body."
         }
     ]
@@ -180,22 +185,22 @@ def relaxation_detail(request, technique_slug):
         "deep-breathing": {
             "title": "Deep Breathing",
             "sections": [
-                {"label": "5 Minute Session", "youtube_url": "https://www.youtube.com/embed/j-1n3KJR1I8", "desc": "description.........."},
-                {"label": "10 Minute Session", "youtube_url": "https://www.youtube.com/embed/LiUnFJ8P4gM", "desc": "description.........."}
+                {"label": "5 Minute Session", "youtube_url": "https://www.youtube.com/embed/j-1n3KJR1I8", "desc": "This video gently guides you through the 4-7-8 breathing method by inhaling for 4 seconds, hold for 7, and exhale for 8. It's a calming way to slow down, ease stress, and feel more centered."},
+                {"label": "10 Minute Session", "youtube_url": "https://www.youtube.com/embed/LiUnFJ8P4gM", "desc": "This video leads you through a simple deep breathing exercise set to calming visuals and music. It's a peaceful way to reset your mind and relax your body."}
             ]
         },
         "pmr": {
             "title": "Progressive Muscle Relaxation",
             "sections": [
-                {"label": "5 Minute Session", "youtube_url": "https://www.youtube.com/embed/5q3K-6HvQIk", "desc": "description.........."},
-                {"label": "15 Minute Session", "youtube_url": "https://www.youtube.com/embed/86HUcX8ZtAk", "desc": "description.........."}
+                {"label": "5 Minute Session", "youtube_url": "https://www.youtube.com/embed/5q3K-6HvQIk", "desc": "This video guides you through progressive muscle relaxation, helping you tense and release different muscle groups to ease physical tension. It's a calming way to reconnect with your body and reduce stress."},
+                {"label": "15 Minute Session", "youtube_url": "https://www.youtube.com/embed/86HUcX8ZtAk", "desc": "This session walks you through progressive muscle relaxation with clear, steady instructions. It's designed to help you let go of built-up tension and feel more physically and mentally relaxed."}
             ]
         },
         "meditation": {
             "title": "Mindfulness Meditation",
             "sections": [
-                {"label": "10 Minute Session", "youtube_url": "https://www.youtube.com/embed/6p_yaNFSYao", "desc": "description.........."},
-                {"label": "20 Minute Session", "youtube_url": "https://www.youtube.com/embed/-2zdUXve6fQ", "desc": "description.........."}
+                {"label": "10 Minute Session", "youtube_url": "https://www.youtube.com/embed/6p_yaNFSYao", "desc": "This video offers a short mindfulness meditation focused on breathing and awareness. It's a simple way to slow down, stay present, and create a sense of calm."},
+                {"label": "20 Minute Session", "youtube_url": "https://www.youtube.com/embed/-2zdUXve6fQ", "desc": "This guided meditation helps you center your attention and gently observe your thoughts. It's a quiet practice to build mindfulness and reduce mental clutter."}
             ]
         }
     }

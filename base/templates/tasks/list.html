@@ -1,39 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2 style="text-align: center;">Your Tasks</h2>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-<div style="text-align: center; margin-bottom: 20px;">
-  <a href="{% url 'task_create' %}">+ Add New Task</a> |
-  <a href="{% url 'completed_tasks' %}">✅ View Completed</a>
+<h2 class="homepage-heading">Your Tasks</h2>
+
+<div class="task-links">
+  <a href="{% url 'task_create' %}" class="nav-button">+ Add New Task</a>
+  <a href="{% url 'completed_tasks' %}" class="nav-button">View Completed</a>
 </div>
 
-<div style="max-width: 800px; margin: 0 auto;">
+<div class="task-list-container">
   {% for task in tasks %}
-    <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
-      <strong>{{ task.title }}</strong> 
-      {% if task.is_due_soon %}
-        <span style="color: red; font-weight: bold;">(Due Soon)</span>
-      {% endif %}
-      <br>
-      <small>Due: {{ task.due_date }}</small>
+    <div class="task-card">
+      <div>
+        <strong>{{ task.title }}</strong>
+        {% if task.is_due_soon %}
+          <span class="due-soon-label">(Due Soon)</span>
+        {% endif %}
+      </div>
+      <div class="task-due">Due: {{ task.due_date }}</div>
+
       {% if task.notes %}
-        <p>{{ task.notes }}</p>
+        <p class="task-notes">{{ task.notes }}</p>
       {% endif %}
 
-      <form method="POST" action="{% url 'task_complete' task.pk %}" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit">Mark as Done</button>
-      </form>
+      <div class="task-actions">
+        <form method="POST" action="{% url 'task_complete' task.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="nav-button">Mark as Done</button>
+        </form>
 
-      <form method="POST" action="{% url 'task_delete' task.pk %}" style="display: inline;" class="delete-form">
-        {% csrf_token %}
-        <button type="submit" style="color: red;">Delete</button>
-      </form>
+        <form method="POST" action="{% url 'task_delete' task.pk %}" class="inline-form delete-form">
+          {% csrf_token %}
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
 
-      <a href="{% url 'task_edit' task.pk %}">Edit</a>
+        <a href="{% url 'task_edit' task.pk %}" class="edit-link">Edit</a>
+      </div>
     </div>
   {% empty %}
-    <p style="text-align: center;">You have no pending tasks.</p>
+    <p class="task-empty">You have no pending tasks.</p>
   {% endfor %}
 </div>
 

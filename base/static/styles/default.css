@@ -681,3 +681,215 @@ a {
   font-size: 0.95rem;
   color: #333;
 }
+
+/* task scheduling */
+.task-links {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.task-list-container {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task-card {
+  background-color: #f0f4ff;
+  border: 1px solid #cdd8e5;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.task-card strong {
+  font-size: 1.05rem;
+  color: #1e293b;
+}
+
+.task-due {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.task-notes {
+  margin: 12px 0;
+  color: #333;
+}
+
+.task-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.task-actions .nav-button,
+.task-actions .delete-btn,
+.task-actions .edit-link {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+}
+
+.task-actions .edit-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.task-actions .edit-link:hover {
+  text-decoration: underline;
+}
+
+.task-empty {
+  text-align: center;
+  color: #444;
+}
+
+.due-soon-label {
+  color: #d11a2a;
+}
+
+/* dark mode */
+body.dark-mode {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark-mode .homepage-heading,
+.dark-mode .welcome-title,
+.dark-mode .journal-heading,
+.dark-mode .settings-title,
+.dark-mode .progress-box h4,
+.dark-mode .tip-title {
+  color: #93c5fd;
+}
+
+.dark-mode .main-header,
+.dark-mode .card,
+.dark-mode .tip-card,
+.dark-mode .journal-form-wrapper,
+.dark-mode .journal-list-wrapper,
+.dark-mode .settings-wrapper,
+.dark-mode .progress-box,
+.dark-mode .form-wrapper,
+.dark-mode .modal-content,
+.dark-mode .task-card,
+.dark-mode .relaxation-card,
+.dark-mode .auth-container,
+.dark-mode .timer-wrapper {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+.dark-mode .card h4,
+.dark-mode .tip-title,
+.dark-mode .progress-count,
+.dark-mode .journal-link,
+.dark-mode .task-card strong {
+  color: #bfdbfe;
+}
+
+.dark-mode .card p,
+.dark-mode .tip-content,
+.dark-mode .tip-comments-list,
+.dark-mode .tip-comment-item,
+.dark-mode .journal-empty,
+.dark-mode .task-notes,
+.dark-mode .task-due,
+.dark-mode .auth-footer-text {
+  color: #cbd5e1;
+}
+
+.dark-mode .nav-button,
+.dark-mode .nav-link,
+.dark-mode .timer-settings-btn,
+.dark-mode .auth-button {
+  background-color: #334155;
+  color: #bfdbfe;
+  border: none;
+}
+
+.dark-mode .edit-link {
+  color: #bfdbfe;
+  border: none;
+}
+
+.dark-mode .nav-button:hover,
+.dark-mode .nav-link:hover,
+.dark-mode .timer-settings-btn:hover,
+.dark-mode .auth-button:hover {
+  background-color: #475569;
+}
+
+.dark-mode .delete-btn {
+  color: #f87171;
+}
+
+.dark-mode .delete-btn:hover {
+  color: #fca5a5;
+}
+
+.dark-mode .toggle-btn {
+  border: 1px solid #475569;
+  color: #e2e8f0;
+  background-color: transparent;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+}
+
+.dark-mode .comment-input,
+.dark-mode .timer-input {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+.dark-mode .timer-wrapper {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+.dark-mode .timer-display {
+  color: #bfdbfe;
+}
+
+.dark-mode .timer-btn {
+  background-color: #334155;
+  color: #bfdbfe;
+  border-color: #475569;
+}
+
+.dark-mode .timer-btn:hover {
+  background-color: #475569;
+}
+
+.dark-mode .mode-tab.active {
+  border-bottom: 3px solid #93c5fd;
+  color: #93c5fd;
+}
+
+.dark-mode .modal-content {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+.dark-mode .session-desc {
+  color: #e2e8f0;
+}
+
+.dark-mode .welcome-container,
+.dark-mode .welcome-highlights ul li,
+.dark-mode .welcome-intro {
+  color: #e2e8f0;
+  background-color: #1e293b;
+}

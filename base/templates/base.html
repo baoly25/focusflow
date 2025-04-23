@@ -6,19 +6,18 @@
     <title>FocusFlow</title>
     <link rel="stylesheet" href="{% static 'styles/default.css' %}">
 </head>
-<body>
-  <header class="main-header">
+<body class=""> <header class="main-header">
     <div class="header-left">
       <a href="{% url 'home' %}" class="nav-link">Home</a>
     </div>
-  
+
     <div class="header-center">
       <a href="{% url 'home' %}" class="site-title">FocusFlow</a>
     </div>
-  
+
     <div class="header-right">
       {% if request.user.is_authenticated %}
-      
+
         <form action="{% url 'logout' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="nav-button">Log Out</button>
@@ -44,29 +43,23 @@
     </footer>
 
     <script>
-        const mode = localStorage.getItem('mode') || 'light';
-        document.body.classList.add(mode + '-mode');
+        function applyTheme() {
+            const mode = localStorage.getItem('mode') || 'light';
+            document.body.className = `${mode}-mode`; // Directly set the className
 
-        window.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('modeToggle');
             if (btn) {
                 btn.textContent = mode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
             }
-        });
+        }
+
+        window.addEventListener('DOMContentLoaded', applyTheme);
 
         function toggleMode() {
-            const body = document.body;
-            const currentMode = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const currentMode = localStorage.getItem('mode') || 'light';
             const newMode = currentMode === 'dark' ? 'light' : 'dark';
-
-            body.classList.remove(currentMode + '-mode');
-            body.classList.add(newMode + '-mode');
             localStorage.setItem('mode', newMode);
-
-            const btn = document.getElementById('modeToggle');
-            if (btn) {
-                btn.textContent = newMode === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
-            }
+            applyTheme();
         }
     </script>
 </body>

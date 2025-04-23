@@ -14,11 +14,11 @@
   <form method="POST" id="editForm" class="form-wrapper">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="nav-button" style="width: 100%;">Save Changes</button>
+    <button type="submit" class="auth-button" style="width: 100%;">Save Changes</button>
   </form>
 
   <div style="text-align: center; margin-top: 20px;">
-    <a href="{% url 'change_password' %}" class="nav-link">Change Password</a>
+    <a href="{% url 'change_password' %}" class="auth-button">Change Password</a>
   </div>
 
 </div>

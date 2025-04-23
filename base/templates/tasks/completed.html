@@ -1,28 +1,47 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2 style="text-align: center;">Completed Tasks</h2>
+<link rel="stylesheet" href="{% static 'styles/default.css' %}">
 
-<div style="max-width: 600px; margin: 0 auto;">
-  <a href="{% url 'task_list' %}">← Back to Tasks</a>
-</div>
+<h2 class="homepage-heading">Completed Tasks</h2>
 
-<br>
+<div class="task-list-container">
 
-<div style="max-width: 600px; margin: 0 auto;">
+  <a href="{% url 'task_list' %}" class="nav-button" style="width: fit-content;">← Back to Tasks</a>
   {% for task in tasks %}
-    <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
-      <strong>{{ task.title }}</strong><br>
-      <small>Completed. Due was: {{ task.due_date }}</small>
+    <div class="task-card">
+      <strong class="task-title">{{ task.title }}</strong><br>
+      <small class="task-due">Completed. Due was: {{ task.due_date }}</small>
+
       {% if task.notes %}
-        <p>{{ task.notes }}</p>
-        <form method="POST" action="{% url 'task_undo' task.pk %}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit">Undo</button>
-        </form>          
+        <p class="task-notes">{{ task.notes }}</p>
       {% endif %}
+
+      <div class="task-actions">
+        <form method="POST" action="{% url 'task_undo' task.pk %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="nav-button">Undo</button>
+        </form>
+
+        <form method="POST" action="{% url 'task_delete' task.pk %}" class="inline-form delete-form">
+          {% csrf_token %}
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
+      </div>
     </div>
   {% empty %}
-    <p style="text-align: center;">No tasks completed yet.</p>
+    <p class="journal-empty">No tasks completed yet.</p>
   {% endfor %}
 </div>
+
+<script>
+  document.querySelectorAll('.delete-form').forEach(form => {
+    form.addEventListener('submit', function (e) {
+      const confirmed = confirm('Are you sure you want to delete this task?');
+      if (!confirmed) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
 {% endblock %}

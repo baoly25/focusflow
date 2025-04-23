@@ -841,7 +841,8 @@ body.dark-mode {
 
 .dark-mode input,
 .dark-mode textarea,
-.dark-mode select {
+.dark-mode select,
+.dark-mode .welcome-container {
   background-color: #1e293b;
   color: #e2e8f0;
   border: 1px solid #475569;

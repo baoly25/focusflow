@@ -884,7 +884,9 @@ body.dark-mode {
   color: #e2e8f0;
 }
 
-.dark-mode .session-desc {
+.dark-mode .session-desc,
+.dark-mode .session-label,
+.dark-mode .auth-heading {
   color: #e2e8f0;
 }
 

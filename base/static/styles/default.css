@@ -886,7 +886,8 @@ body.dark-mode {
 
 .dark-mode .session-desc,
 .dark-mode .session-label,
-.dark-mode .auth-heading {
+.dark-mode .auth-heading,
+.dark-mode .task-empty {
   color: #e2e8f0;
 }
 

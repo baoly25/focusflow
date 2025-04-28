@@ -13,6 +13,10 @@
             {% if form.username.errors %}
                 <div class="error">{{ form.username.errors }}</div>
             {% endif %}
+            <ul>
+                <li>Required, 150 or less characters</li>
+                <li>Only contains letters, digits, and @/./+/-/_</li>
+            </ul>
         </div>
 
         <br>
@@ -33,6 +37,13 @@
             {% if form.password1.errors %}
                 <div class="error">{{ form.password1.errors }}</div>
             {% endif %}
+            <ul>
+                <li>Password must be at least 8 characters</li>
+                <li>Password must not be all numbers</li>
+                <li>Password cannot be a commonly used one</li>
+                <li>Password cannot be similiar to username or email</li>
+                <li>Only contains letters, digits, and @/./+/-/_</li>
+            </ul>
         </div>
 
         <br>

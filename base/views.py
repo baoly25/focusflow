@@ -3,7 +3,6 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
 from .forms import EmailAuthenticationForm
-from django.shortcuts import render
 from .models import Journal
 from .forms import JournalForm
 from django.contrib.auth.decorators import login_required

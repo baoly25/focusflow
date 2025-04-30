@@ -14,9 +14,14 @@ from .views import (
 )
 
 urlpatterns = [
+    # home
     path('', homepage, name='home'),
+
+    # registration 
     path('register/', register, name='register'),
     path('login/', login_view, name='login'),
+
+    # pomodoro timer
     path('timer/', pomodoro_timer, name='timer'),
 
     # journal
@@ -40,9 +45,11 @@ urlpatterns = [
     path('affirmations/comment/<int:comment_id>/delete/', delete_affirmation_comment, name='delete_affirmation_comment'),
     
 
+    # relaxation techniques
     path('relaxation/', relaxation_list, name='relaxation_list'),
     path('relaxation/<slug:technique_slug>/', relaxation_detail, name='relaxation_detail'),
     
+    # logout
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 
     # tasks
